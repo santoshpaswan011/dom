@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Basic Information Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: pink;
+    }
+    form, .output {
+      margin-bottom: 20px;
+    }
+    .output {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-left: 4px solid #007BFF;
+    }
+    
+    
+    #datetime {
+      font-size: 2em;
+      color: #333;
+    }
+  
+  </style>
+</head>
+<body>
+    <h2>2.Click the Button to Change the Image</h2>
+
+  <img id="myImage" src="./san.jpg" alt="Image" width="200"><br><br>
+
+  <button onclick="changeImage()">Change Image</button>
+
+<hr>
+
+  <h2>1.Basic Information Form</h2>
+  <form id="infoForm">
+    <label>Name: <input type="text" id="name" required></label><br><br>
+    <label>Email: <input type="email" id="email" required></label><br><br>
+    <label>Age: <input type="number" id="age"></label><br><br>
+    <label>Country: <input type="text" id="country"></label><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="display" class="output" style="display: none;"></div>
+  <hr>
+
+
+  <h2>3.Change Font Size with Buttons</h2>
+
+  <button onclick="increaseFont()">Increase Font Size</button>
+  <button onclick="decreaseFont()">Decrease Font Size</button>
+
+  <p id="text">Hello Guys My Name is Santosh Paswan.</p>
+  <hr>
+
+  <h2>4.Current Date & Time</h2>
+
+  <div id="datetime">Loading...</div>
+  <a href="./time.html">click here to show the time</a>
+
+
+
+  <script>
+    document.getElementById("infoForm").addEventListener("submit", function(e) {
+      e.preventDefault(); 
+
+   
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const age = document.getElementById("age").value;
+      const country = document.getElementById("country").value;
+
+      
+      const output = `
+        <strong>Submitted Information:</strong><br>
+        Name: ${name}<br>
+        Email: ${email}<br>
+        Age: ${age}<br>
+        Country: ${country}
+      `;
+
+    
+      const displayDiv = document.getElementById("display");
+      displayDiv.innerHTML = output;
+      displayDiv.style.display = "block";
+    });
+
+
+    function changeImage() {
+      document.getElementById("myImage").src = "tan.jpg";
+    }
+    const textElement = document.getElementById("text");
+
+    function increaseFont() {
+      let currentSize = window.getComputedStyle(textElement, null).getPropertyValue('font-size');
+      let newSize = parseFloat(currentSize) + 2;
+      textElement.style.fontSize = newSize + "px";
+    }
+
+    function decreaseFont() {
+      let currentSize = window.getComputedStyle(textElement, null).getPropertyValue('font-size');
+      let newSize = parseFloat(currentSize) - 2;
+      textElement.style.fontSize = newSize + "px";
+    //date and time 
+    function showDateTime() {
+      const now = new Date();
+      const formatted = now.toLocaleString(); // Local date + time
+      document.getElementById("dateTime").textContent = formatted;
+    }
+
+    
+    showDateTime();
+
+    setInterval(showDateTime, 1000);
+  }
+  </script>
+
+</body>
+</html>
